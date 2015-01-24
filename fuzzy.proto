@@ -1,0 +1,42 @@
+// fuzzy.proto
+// Definition of the fuzzy logic protocol buffers
+
+syntax = "proto2";
+
+package gfuzzy;
+
+message Input {
+  required string name = 1;
+}
+
+message Rule {
+  required string name = 1;
+  required string antecedent = 2;
+  required string consequent = 3;
+  optional float weight = 4;
+}
+
+message Set {
+  required string name = 1;
+  required string type = 2;
+  repeated float param = 3;
+}
+
+message Consequent {
+  required string name = 1;
+  required string output = 2;
+  required string set = 3;
+}
+
+message Output {
+  required string name = 1;
+}
+
+message System {
+  required string name = 1;
+  repeated Input input = 2;
+  repeated Rule rule = 3;
+  repeated Set set = 4;
+  repeated Consequent consequent = 5;
+  repeated Output output = 6;
+}

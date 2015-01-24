@@ -1,0 +1,133 @@
+  name: "CPU Memory System"
+  input:<
+    name: "cpu"
+  >
+  input:<
+    name: "ram"
+  >
+  rule:<
+    name: "1"
+    antecedent: "cpu is cpu_good * ram is ram_good"
+    consequent: "health is health_very_good"
+  >
+  rule:<
+    name: "2"
+    antecedent: "cpu is cpu_good * ram is ram_average"
+    consequent: "health is health_good"
+  >
+  rule:<
+    name: "3"
+    antecedent: "cpu is cpu_good * ram is ram_bad"
+    consequent: "health is health_bad"
+  >
+  rule:<
+    name: "4"
+    antecedent: "cpu is cpu_average * ram is ram_good"
+    consequent: "health is health_good"
+  >
+  rule:<
+    name: "5"
+    antecedent: "cpu is cpu_average * ram is ram_average"
+    consequent: "health is health_good"
+  >
+  rule:<
+    name: "6"
+    antecedent: "cpu is cpu_average * ram is ram_bad"
+    consequent: "health is health_bad"
+  >
+  rule:<
+    name: "7"
+    antecedent: "cpu is cpu_bad * ram is ram_good"
+    consequent: "health is health_bad"
+  >
+  rule:<
+    name: "8"
+    antecedent: "cpu is cpu_bad * ram is ram_average"
+    consequent: "health is health_bad"
+  >
+  rule:<
+    name: "9"
+    antecedent: "cpu is cpu_bad * ram is ram_bad"
+    consequent: "health is health_bad"
+  >
+  set:<
+    name: "cpu_good"
+    type: "triangular"
+    param: -0.4
+    param: 0
+    param: 0.4
+  >
+  set:<
+    name: "cpu_average"
+    type: "triangular"
+    param: 0.1
+    param: 0.5
+    param: 0.9
+  >
+  set:<
+    name: "cpu_bad"
+    type: "triangular"
+    param: 0.6
+    param: 1.0
+    param: 1.4
+  >
+  set:<
+    name: "ram_good"
+    type: "triangular"
+    param: -10
+    param: 0
+    param: 0.5
+  >
+  set:<
+    name: "ram_average"
+    type: "triangular"
+    param: 0.1
+    param: 0.5
+    param: 0.9
+  >
+  set:<
+    name: "ram_bad"
+    type: "triangular"
+    param: 0.6
+    param: 1.0
+    param: 1.4
+  >
+  set:<
+    name: "health_bad"
+    type: "triangular"
+    param: -0.4
+    param: 0
+    param: 0.4
+  >
+  set:<
+    name: "health_good"
+    type: "triangular"
+    param: 0.1
+    param: 0.5
+    param: 0.9
+  >
+  set:<
+    name: "health_very_good"
+    type: "triangular"
+    param: 0.6
+    param: 1
+    param: 1.4
+  >
+  consequent:<
+    name: "health is health_very_good"
+    output: "health"
+    set: "health_very_good"
+  >
+  consequent:<
+    name: "health is health_good"
+    output: "health"
+    set: "health_good"
+  >
+  consequent:<
+    name: "health is health_bad"
+    output: "health"
+    set: "health_bad"
+  >
+  output:<
+    name: "health"
+  >
